@@ -31,6 +31,12 @@ webpackJsonp([0],[
 
 	    return q.fcall(function(){
 
+	      return true;
+	    })
+	    .delay(600)
+	    .then(function() {
+
+	      that.$el.find('#home').addClass('ready');
 	      return that;
 	    });
 

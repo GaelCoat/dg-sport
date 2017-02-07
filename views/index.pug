@@ -10,8 +10,10 @@ head
   link(href="css/responsive.css", rel="stylesheet", type="text/css")
 body
 
+include ./subviews/home
 
-include ./templates
+.templates
+  include ./templates
 
 //- Webpack Bundles
 script(src='./vendor.bundle.js')
