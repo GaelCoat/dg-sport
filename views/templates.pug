@@ -1,0 +1,142 @@
+script(type="text/template", id="tpl-video-popup")
+  .veil
+    .bg.close
+    .align
+    .modal
+      iframe#ytplayer(type='text/html', width='100%', height='100%', src='{{url}}', frameborder='0')
+
+script(type="text/template", id="tpl-img-popup")
+  .veil
+    .bg.close
+    .align
+    .modal
+      img(src="{{url}}")
+
+script(type="text/template", id="tpl-stats-data")
+  li(data-season='{{year}}')
+    img.club.notMobile(src='./img/clubs/{{data.club.name}}.png')
+    .centered
+      img.club.mobile(src='./img/clubs/{{data.club.name}}.png')
+      .each
+        h3
+          b {{data.games.total}}
+          span match joués
+        .details
+          <% if (data.games.l1) { %>
+          .spec
+            h4
+              b {{data.games.l1}}
+              span En L1
+            .curve
+              .percentage(style='height:{{Math.round(data.games.l1*100/data.games.total)}}%; opacity:{{data.games.l1/data.games.total}}')
+          <% } %>
+          <% if (data.games.c1) { %>
+          .spec
+            h4
+              b {{data.games.c1}}
+              span En C1
+            .curve
+              .percentage(style='height:{{Math.round(data.games.c1*100/data.games.total)}}%; opacity:{{data.games.c1/data.games.total}}')
+          <% } %>
+          <% if (data.games.pl) { %>
+          .spec
+            h4
+              b {{data.games.pl}}
+              span En PL
+            .curve
+              .percentage(style='height:{{Math.round(data.games.pl*100/data.games.total)}}%; opacity:{{data.games.pl/data.games.total}}')
+          <% } %>
+          <% if (data.games.coupe) { %>
+          .spec
+            h4
+              b {{data.games.coupe}}
+              span En Coupe
+            .curve
+              .percentage(style='height:{{Math.round(data.games.coupe*100/data.games.total)}}%; opacity:{{data.games.coupe/data.games.total}}')
+          <% } %>
+          <% if (data.games.u20) { %>
+          .spec
+            h4
+              b {{data.games.u20}}
+              span En U-20
+            .curve
+              .percentage(style='height:{{Math.round(data.games.u20*100/data.games.total)}}%; opacity:{{data.games.u20/data.games.total}}')
+          <% } %>
+          <% if (data.games.espoir) { %>
+          .spec
+            h4
+              b {{data.games.espoir}}
+              span En Espoir
+            .curve
+              .percentage(style='height:{{Math.round(data.games.espoir*100/data.games.total)}}%; opacity:{{data.games.espoir/data.games.total}}')
+          <% } %>
+      .each
+        h3
+          b {{data.actions.total}}
+          span actions décisives
+        .details
+          .spec
+            h4
+              b {{data.actions.goals}}
+              span Buts marqués
+            .curve
+              .percentage(style='height:{{Math.round(data.actions.goals*100/data.actions.total)}}%; opacity:{{data.actions.goals/data.actions.total}}')
+          .spec
+            h4
+              b {{data.actions.passes}}
+              span Passes décisives
+            .curve
+              .percentage(style='height:{{Math.round(data.actions.passes*100/data.actions.total)}}%; opacity:{{data.actions.passes/data.actions.total}}')
+
+
+script(type="text/template", id="tpl-menu-web")
+  aside#fixed-menu
+    button#burger.hamburger.hamburger--slider.js-hamburger
+      span.hamburger-box
+        span.hamburger-inner
+    ul.links.navs
+      li.current(anchor='home', data-scroll='0') Accueil
+      li(anchor='bio', data-scroll='1') Fiche
+      li(anchor='stats', data-scroll='2') Stats
+      li(anchor='team', data-scroll='3') My Team
+      li(anchor='news', data-scroll='4') News
+  header#header
+    ul.links.navs
+      li.current(anchor='home') Accueil
+      li(anchor='bio') Fiche
+      li(anchor='stats') Stats
+      li(anchor='team') My Team
+      li(anchor='news') News
+  aside#social
+    a(href="https://www.facebook.com/FlorianThauvin/?fref=ts", target="_blank")
+      i.fa.fa-facebook
+      span FlorianThauvin
+    a(href="https://twitter.com/FlorianThauvin", target="_blank")
+      i.fa.fa-twitter
+      span @FlorianThauvin
+    a(href="https://www.instagram.com/flotov/", target="_blank")
+      i.fa.fa-instagram
+      span Flotov
+
+script(type="text/template", id="tpl-menu-mobile")
+  aside#fixed-menu.mobile
+    button#burger.hamburger.hamburger--slider.js-hamburger
+      span.hamburger-box
+        span.hamburger-inner
+    .overlay
+      ul.sweg.navs
+        li.current(anchor='home', data-scroll='0') Accueil
+        li(anchor='bio', data-scroll='1') Fiche
+        li(anchor='stats', data-scroll='2') Stats
+        li(anchor='team', data-scroll='3') My Team
+        li(anchor='news', data-scroll='4') News
+
+script(type="text/template", id="tpl-social-mobile")
+  aside#social.mobile
+    a(href="https://www.facebook.com/FlorianThauvin/?fref=ts", target="_blank")
+      i.fa.fa-facebook
+    a(href="https://twitter.com/FlorianThauvin", target="_blank")
+      i.fa.fa-twitter
+    a(href="https://www.instagram.com/flotov/", target="_blank")
+      i.fa.fa-instagram
+
