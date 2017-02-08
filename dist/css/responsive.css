@@ -1,0 +1,14 @@
+@media screen and (max-width: 1440px){
+
+  section#home .col img {
+    margin-left: -10%;
+  }
+
+  section#thinking .content {
+    width: 60%;
+  }
+
+  section#us .row p {
+    width: 70%;
+  }
+}
