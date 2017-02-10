@@ -67,6 +67,10 @@ var Main = Backbone.View.extend({
     var that = this;
 
     $(window).scroll(this.scroll.bind(this));
+    $(window).resize(function() {
+
+      Backbone.trigger('window:resize');
+    });
 
     return q.fcall(function(){
 

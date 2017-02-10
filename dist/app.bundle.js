@@ -78,6 +78,10 @@ webpackJsonp([0],[
 	    var that = this;
 
 	    $(window).scroll(this.scroll.bind(this));
+	    $(window).resize(function() {
+
+	      Backbone.trigger('window:resize');
+	    });
 
 	    return q.fcall(function(){
 
@@ -252,10 +256,18 @@ webpackJsonp([0],[
 	  initialize: function(params) {
 
 	    this.listenTo(Backbone, 'window:scroll', this.scroll.bind(this));
+	    this.listenTo(Backbone, 'window:resize', this.resize.bind(this));
 	    this.force = params.force;
 	    this.firstTop = this.$el.offset().top;
 
 	    this.type = params.type;
+	  },
+
+	  resize: function() {
+
+	    this.firstTop = this.$el.offset().top;
+	    this.windowHeight = $(window).height();
+	    return this.scroll($(window));
 	  },
 
 	  //-------------------------------------

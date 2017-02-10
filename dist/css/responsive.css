@@ -4,6 +4,14 @@
     margin-left: -10%;
   }
 
+  section#projects .col a .bot h4 {
+    font-size: 24px;
+  }
+
+  section#projects .col a .bot {
+    padding: 8% 10%;
+  }
+
   section#thinking .content {
     width: 60%;
   }
