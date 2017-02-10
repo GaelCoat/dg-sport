@@ -181,6 +181,50 @@ section.ready .transit:last-of-type:not(:first-child){
 }
 
 /* ----------------------------------------------------- */
+/* ----------------------------------------- HEADER
+/* ----------------------------------------------------- */
+header#header {
+  text-align: left;
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  z-index: 99;
+  padding-top: 32px;
+}
+
+header#header:after {
+  content: '';
+  display: block;
+  clear: both;
+  float: none;
+}
+
+header#header img.logo{
+  height: 45px;
+}
+
+header#header ul{
+  float: right;
+  text-align: right;
+}
+
+header#header li{
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  font-family: PierLight;
+  font-size: 18px;
+  margin-left: 18px;
+  cursor: pointer;
+  padding-bottom: 2px;
+}
+
+header#header li:hover{
+  border-bottom: 1px solid white;
+}
+
+/* ----------------------------------------------------- */
 /* ----------------------------------------- HOME
 /* ----------------------------------------------------- */
 section#home {
@@ -293,7 +337,6 @@ section#home.ready .row h1:before{ transition-delay: .5s; }
 section#home.ready .row h1:after{  transition-delay: .7s; }
 
 section#home .row p{
-  font-family: Pier;
   font-size: 22px;
   margin-top: 12px;
   line-height: 27px;
@@ -392,6 +435,10 @@ section#projects .col .year{
   transform: translate(0, 75px);
 }
 
+section#projects .col .year span{
+  display: block;
+  transition: .3s;
+}
 
 section#projects.ready .col .year{
   opacity: 1;
@@ -412,6 +459,7 @@ section#projects .col:last-of-type .year{
 
 section#projects .col:last-of-type{
   margin-top: 72px;
+  transition: .3s;
 }
 
 section#projects .col a{
@@ -441,7 +489,13 @@ section#projects.ready .col:last-of-type a:nth-of-type(3) { transition-delay: 1.
 section#projects .col a img{
   width: 100%;
   display: block;
+  transition: .2s;
 }
+
+section#projects .col a img:hover{
+  box-shadow: 0 30px 50px 0 rgba(0,0,0,.25), 0 60px 90px 0 rgba(0,0,0,.2);
+}
+
 
 /* ----------------------------------------------------- */
 /* ----------------------------------------- THINKING
@@ -602,7 +656,7 @@ section#us .row blockquote span{
 section#us.ready .row blockquote span{
   opacity: 1;
   transform: translate(0, 0%);
-  transition: .4s ease .5s;
+  transition: opacity .4s ease .5s, transform .4s ease .5s;
 }
 
 section#us.ready .row blockquote span:last-child{
@@ -647,6 +701,7 @@ section#contact{
   text-align: center;
   padding: 20vh 0;
   position: relative;
+  background-color: #353740;
 }
 
 section#contact .row{

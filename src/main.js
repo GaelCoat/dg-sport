@@ -1,4 +1,5 @@
 var hope = require('./libs/appear');
+var Parallax = require('./views/parallax');
 
 _.templateSettings = {
   interpolate: /\{\{(.+?)\}\}/g,
@@ -20,8 +21,30 @@ var Main = Backbone.View.extend({
   //-------------------------------------
   // Scroll Handle
   //-------------------------------------
-  scroll: function(e) {
+  scroll: _.throttle(function(e) {
 
+    Backbone.trigger('window:scroll', e);
+  }, 20),
+
+  //-------------------------------------
+  // OnScroll Parallax
+  //-------------------------------------
+  initParallax: function() {
+
+    var that = this;
+
+    this.$el.find('.parallax').each(function() {
+
+      var $this = $(this);
+      var view = new Parallax({
+        el: $this,
+        force: $this.data('force'),
+        type: $this.data('type')
+      });
+      view.render();
+    });
+
+    return this;
   },
 
   //-------------------------------------
@@ -34,7 +57,7 @@ var Main = Backbone.View.extend({
     // Apparitions
     $('section').appear();
     $('section').on('appear', function(event, $els) { $els.addClass('ready'); });
-    $('section').on('disappear', function(event, $els) { $els.removeClass('ready'); });
+    //$('section').on('disappear', function(event, $els) { $els.removeClass('ready'); });
 
     return this;
   },
@@ -47,8 +70,10 @@ var Main = Backbone.View.extend({
 
     return q.fcall(function(){
 
-      that.initAppears();
-      return true;
+      return [
+        that.initAppears(),
+        that.initParallax()
+      ]
     })
     .delay(600)
     .then(function() {
