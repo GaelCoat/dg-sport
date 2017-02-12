@@ -224,6 +224,11 @@ header#header li:hover{
   border-bottom: 1px solid white;
 }
 
+header#header li:last-child{
+  border-left: 2px solid #fff;
+  padding-left: 18px;
+}
+
 /* ----------------------------------------------------- */
 /* ----------------------------------------- HOME
 /* ----------------------------------------------------- */

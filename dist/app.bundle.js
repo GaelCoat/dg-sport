@@ -11,6 +11,8 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */(function(_, Backbone, $, q) {var hope = __webpack_require__(9);
 	var Parallax = __webpack_require__(10);
+	var Section = __webpack_require__(11);
+	var Lang = __webpack_require__(12)
 
 	_.templateSettings = {
 	  interpolate: /\{\{(.+?)\}\}/g,
@@ -24,6 +26,8 @@ webpackJsonp([0],[
 	  sections: [],
 
 	  events: {},
+
+	  nat: 'fr',
 
 	  initialize: function(params) {
 
@@ -73,6 +77,21 @@ webpackJsonp([0],[
 	    return this;
 	  },
 
+	  renderSections: function() {
+
+	    var that = this;
+
+	    this.$el.find('section').each(function() {
+
+	      var view = new Section({
+	        el: $(this),
+	        id: $(this).attr('id'),
+	        lang: Lang[that.nat],
+	      });
+	      view.render();
+	    });
+	  },
+
 	  render: function() {
 
 	    var that = this;
@@ -83,7 +102,8 @@ webpackJsonp([0],[
 	      Backbone.trigger('window:resize');
 	    });
 
-	    return q.fcall(function(){
+	    return q.fcall(that.renderSections.bind(that))
+	    .then(function() {
 
 	      return [
 	        that.initAppears(),
@@ -309,6 +329,71 @@ webpackJsonp([0],[
 
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)))
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Backbone, _, $, q) {
+	module.exports = Backbone.View.extend({
+
+	  events: {},
+
+	  lang: 'fr',
+
+	  initialize: function(params) {
+
+	    this.lang = params.lang[this.id];
+	    console.log(this.lang);
+	  },
+
+	  getTpl: function() {
+
+	    this.tpl = _.template($('#tpl-'+this.id).html());
+	    return this;
+	  },
+
+	  render: function() {
+
+	    var that = this;
+
+	    return q.fcall(that.getTpl.bind(that))
+	    .then(function() {
+
+	      that.$el.html(that.tpl({
+	        lang: that.lang
+	      }));
+	      return that;
+	    });
+	  },
+
+	});
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(2), __webpack_require__(4), __webpack_require__(5)))
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	
+	module.exports = {
+
+	  fr: {
+	    home: {
+	      subtitle: '<span>Accompagne les sportifs de haut</span><span>niveau dans le développement de leur</span><span>communauté et d’une identité digitale</span>'
+	    },
+	    thinking: {
+	      txt: 'Nous sommes convaincus que le digital joue désormais un rôle majeur dans le monde du sport. Il permet aux sportifs de fédérer une communauté, de bâtir une image forte, de marketer leurs performances… Autant d’éléments sous évalués mais pourtant essentiels pour décupler la valeur d’un sportif à travers ses contrats en clubs, ses contrats de sponsoring & pour lui permettre de réussir ses projets annexes.',
+	      quote: '<span>Le nom d\'un grand</span><span>sportif est une</span><span>marque qu\'il</span><span>convient à ce</span><span>titre de protéger et</span><span>de développer sur</span><span>le plan digital.</span>',
+	    },
+	    us: {
+	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
+	    },
+	  }
+	}
+
 
 /***/ }
 ]);

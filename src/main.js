@@ -1,5 +1,7 @@
 var hope = require('./libs/appear');
 var Parallax = require('./views/parallax');
+var Section = require('./views/section');
+var Lang = require('./lang')
 
 _.templateSettings = {
   interpolate: /\{\{(.+?)\}\}/g,
@@ -13,6 +15,8 @@ var Main = Backbone.View.extend({
   sections: [],
 
   events: {},
+
+  nat: 'fr',
 
   initialize: function(params) {
 
@@ -62,6 +66,21 @@ var Main = Backbone.View.extend({
     return this;
   },
 
+  renderSections: function() {
+
+    var that = this;
+
+    this.$el.find('section').each(function() {
+
+      var view = new Section({
+        el: $(this),
+        id: $(this).attr('id'),
+        lang: Lang[that.nat],
+      });
+      view.render();
+    });
+  },
+
   render: function() {
 
     var that = this;
@@ -72,7 +91,8 @@ var Main = Backbone.View.extend({
       Backbone.trigger('window:resize');
     });
 
-    return q.fcall(function(){
+    return q.fcall(that.renderSections.bind(that))
+    .then(function() {
 
       return [
         that.initAppears(),
