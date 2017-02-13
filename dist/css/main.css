@@ -186,8 +186,8 @@ section.ready .transit:last-of-type:not(:first-child){
 header#header {
   text-align: left;
   position: absolute;
-  left: 15%;
-  right: 15%;
+  left: 0;
+  right: 0;
   top: 0;
   z-index: 99;
   padding-top: 32px;
@@ -504,13 +504,13 @@ section#projects.ready .col .year{
 }
 
 section#projects .col:first-of-type .year{
-  left: -100px;
-  top: -110px;
+  left: -15%;
+  top: -16%;
 }
 
 section#projects .col:last-of-type .year{
-  right: -100px;
-  bottom: -80px;
+  right: -15%;
+  bottom: -12%;
   z-index: 99;
 }
 
@@ -655,7 +655,71 @@ section#projects .col a.maximin:hover img.masked {
   }
 }
 
+/* ----------------------------------------------------- */
+/* ----------------------------------------- SKILLS
+/* ----------------------------------------------------- */
+section#skills{
+  text-align: right;
+  margin: 20vh 0;
+  position: relative;
+}
 
+section#skills .cube{
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 19vw;
+  height: 19vw;
+}
+
+section#skills .row{
+  height: 19vw;
+  font-size: 0;
+}
+
+section#skills .row h2{
+  text-align: left;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20%;
+  margin: 0;
+}
+
+section#skills .row ul{
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  width: 80%;
+}
+
+section#skills .row ul li{
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10%;
+}
+
+section#skills .row ul li:first-child{
+  margin-left: 0%;
+}
+
+section#skills .row ul img{
+  display: block;
+  margin: 0 auto;
+}
+
+section#skills .row ul span{
+  display: block;
+  margin: 0 auto;
+  font-size: 20px;
+  margin-bottom: 4px;
+  margin-top: 24px;
+}
+
+section#skills .row ul p{
+  display: block;
+  margin: 0 auto;
+}
 
 
 /* ----------------------------------------------------- */

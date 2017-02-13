@@ -1,3 +1,29 @@
+@media screen and (max-width: 1800px){
+
+  .row {
+    width: 75%;
+  }
+
+  h1 {
+    font-size: 7.2vw;
+    line-height: 7.2vw;
+  }
+
+  section#skills .row ul li {
+    margin-left: 5%;
+  }
+
+  section#skills .row ul span {
+    font-size: 18px;
+  }
+
+  section#skills .row ul p {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+}
+
 @media screen and (max-width: 1440px){
 
   section#home .col img {
@@ -19,4 +45,17 @@
   section#us .row p {
     width: 70%;
   }
+}
+
+@media screen and (max-width: 1330px){
+
+  .row {
+    width: 80%;
+  }
+
+  h1 {
+    font-size: 7.7vw;
+    line-height: 7.7vw;
+  }
+
 }

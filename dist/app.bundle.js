@@ -115,15 +115,29 @@ webpackJsonp([0],[
 
 	    var that = this;
 
+	    var promises = [];
+
 	    this.$el.find('section').each(function() {
 
-	      var view = new Section({
-	        el: $(this),
-	        id: $(this).attr('id'),
-	        lang: Lang[that.nat],
-	      });
-	      view.render();
+	      var defer = q.defer();
+	      var $this = $(this);
+
+	      q.fcall(function() {
+
+	        var view = new Section({
+	          el: $this,
+	          id: $this.attr('id'),
+	          lang: Lang[that.nat],
+	        });
+
+	        return view.render();
+	      })
+	      .then(defer.resolve)
+
+	      promises.push(defer.promise);
 	    });
+
+	    return promises;
 	  },
 
 	  render: function() {
@@ -138,6 +152,7 @@ webpackJsonp([0],[
 
 	    return q.fcall(that.getLang.bind(that))
 	    .then(that.renderSections.bind(that))
+	    .all()
 	    .then(function() {
 
 	      return [
