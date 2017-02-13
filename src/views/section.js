@@ -8,7 +8,6 @@ module.exports = Backbone.View.extend({
   initialize: function(params) {
 
     this.lang = params.lang[this.id];
-    console.log(this.lang);
   },
 
   getTpl: function() {

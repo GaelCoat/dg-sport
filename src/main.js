@@ -14,9 +14,12 @@ var Main = Backbone.View.extend({
 
   sections: [],
 
-  events: {},
+  events: {
+    'click header .lang': 'showLangSelect',
+    'click': 'hideLangSelect',
+  },
 
-  nat: 'fr',
+  nat: 'eng',
 
   initialize: function(params) {
 
@@ -29,6 +32,19 @@ var Main = Backbone.View.extend({
 
     Backbone.trigger('window:scroll', e);
   }, 20),
+
+  showLangSelect: function(e) {
+
+    e.stopPropagation();
+    this.$el.find(e.currentTarget).toggleClass('open');
+    return this;
+  },
+
+  hideLangSelect: function(e) {
+
+    this.$el.find('header .lang').removeClass('open');
+    return this;
+  },
 
   //-------------------------------------
   // OnScroll Parallax
@@ -66,6 +82,24 @@ var Main = Backbone.View.extend({
     return this;
   },
 
+  getLang: function() {
+
+    var lang =  window.location.pathname.slice(1);
+    if (lang.length === 0) return this;
+
+    var langs = ['fr', 'en', 'de', 'ita'];
+
+    if (langs.indexOf(lang) === -1) {
+
+      window.history.replaceState(null, 'eng', '/eng');
+      this.nat = 'eng';
+    } else this.nat = lang;
+
+    this.$el.find('header .lang span').text(this.nat);
+
+    return this;
+  },
+
   renderSections: function() {
 
     var that = this;
@@ -91,7 +125,8 @@ var Main = Backbone.View.extend({
       Backbone.trigger('window:resize');
     });
 
-    return q.fcall(that.renderSections.bind(that))
+    return q.fcall(that.getLang.bind(that))
+    .then(that.renderSections.bind(that))
     .then(function() {
 
       return [

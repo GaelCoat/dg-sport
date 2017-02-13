@@ -25,9 +25,12 @@ webpackJsonp([0],[
 
 	  sections: [],
 
-	  events: {},
+	  events: {
+	    'click header .lang': 'showLangSelect',
+	    'click': 'hideLangSelect',
+	  },
 
-	  nat: 'fr',
+	  nat: 'eng',
 
 	  initialize: function(params) {
 
@@ -40,6 +43,19 @@ webpackJsonp([0],[
 
 	    Backbone.trigger('window:scroll', e);
 	  }, 20),
+
+	  showLangSelect: function(e) {
+
+	    e.stopPropagation();
+	    this.$el.find(e.currentTarget).toggleClass('open');
+	    return this;
+	  },
+
+	  hideLangSelect: function(e) {
+
+	    this.$el.find('header .lang').removeClass('open');
+	    return this;
+	  },
 
 	  //-------------------------------------
 	  // OnScroll Parallax
@@ -77,6 +93,24 @@ webpackJsonp([0],[
 	    return this;
 	  },
 
+	  getLang: function() {
+
+	    var lang =  window.location.pathname.slice(1);
+	    if (lang.length === 0) return this;
+
+	    var langs = ['fr', 'en', 'de', 'ita'];
+
+	    if (langs.indexOf(lang) === -1) {
+
+	      window.history.replaceState(null, 'eng', '/eng');
+	      this.nat = 'eng';
+	    } else this.nat = lang;
+
+	    this.$el.find('header .lang span').text(this.nat);
+
+	    return this;
+	  },
+
 	  renderSections: function() {
 
 	    var that = this;
@@ -102,7 +136,8 @@ webpackJsonp([0],[
 	      Backbone.trigger('window:resize');
 	    });
 
-	    return q.fcall(that.renderSections.bind(that))
+	    return q.fcall(that.getLang.bind(that))
+	    .then(that.renderSections.bind(that))
 	    .then(function() {
 
 	      return [
@@ -344,7 +379,6 @@ webpackJsonp([0],[
 	  initialize: function(params) {
 
 	    this.lang = params.lang[this.id];
-	    console.log(this.lang);
 	  },
 
 	  getTpl: function() {
@@ -391,7 +425,49 @@ webpackJsonp([0],[
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
-	  }
+	  },
+
+	  eng: {
+	    home: {
+	      subtitle: '<span>Accompagne les sportifs de haut</span><span>niveau dans le développement de leur</span><span>communauté et d’une identité digitale</span>'
+	    },
+	    thinking: {
+	      txt: 'Nous sommes convaincus que le digital joue désormais un rôle majeur dans le monde du sport. Il permet aux sportifs de fédérer une communauté, de bâtir une image forte, de marketer leurs performances… Autant d’éléments sous évalués mais pourtant essentiels pour décupler la valeur d’un sportif à travers ses contrats en clubs, ses contrats de sponsoring & pour lui permettre de réussir ses projets annexes.',
+	      quote: '<span>Le nom d\'un grand</span><span>sportif est une</span><span>marque qu\'il</span><span>convient à ce</span><span>titre de protéger et</span><span>de développer sur</span><span>le plan digital.</span>',
+	    },
+	    us: {
+	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
+	    },
+	  },
+
+	  de: {
+	    home: {
+	      subtitle: '<span>Accompagne les sportifs de haut</span><span>niveau dans le développement de leur</span><span>communauté et d’une identité digitale</span>'
+	    },
+	    thinking: {
+	      txt: 'Nous sommes convaincus que le digital joue désormais un rôle majeur dans le monde du sport. Il permet aux sportifs de fédérer une communauté, de bâtir une image forte, de marketer leurs performances… Autant d’éléments sous évalués mais pourtant essentiels pour décupler la valeur d’un sportif à travers ses contrats en clubs, ses contrats de sponsoring & pour lui permettre de réussir ses projets annexes.',
+	      quote: '<span>Le nom d\'un grand</span><span>sportif est une</span><span>marque qu\'il</span><span>convient à ce</span><span>titre de protéger et</span><span>de développer sur</span><span>le plan digital.</span>',
+	    },
+	    us: {
+	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
+	    },
+	  },
+
+	  ita: {
+	    home: {
+	      subtitle: '<span>Accompagne les sportifs de haut</span><span>niveau dans le développement de leur</span><span>communauté et d’une identité digitale</span>'
+	    },
+	    thinking: {
+	      txt: 'Nous sommes convaincus que le digital joue désormais un rôle majeur dans le monde du sport. Il permet aux sportifs de fédérer une communauté, de bâtir une image forte, de marketer leurs performances… Autant d’éléments sous évalués mais pourtant essentiels pour décupler la valeur d’un sportif à travers ses contrats en clubs, ses contrats de sponsoring & pour lui permettre de réussir ses projets annexes.',
+	      quote: '<span>Le nom d\'un grand</span><span>sportif est une</span><span>marque qu\'il</span><span>convient à ce</span><span>titre de protéger et</span><span>de développer sur</span><span>le plan digital.</span>',
+	    },
+	    us: {
+	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
+	    },
+	  },
 	}
 
 

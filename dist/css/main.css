@@ -225,8 +225,60 @@ header#header li:hover{
 }
 
 header#header li:last-child{
-  border-left: 2px solid #fff;
-  padding-left: 18px;
+  margin-left: 36px;
+  position: relative;
+  cursor: pointer;
+}
+
+header#header li:last-child span{
+  display: inline-block;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+header#header li:last-child img{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header#header li:last-child:before{
+  position: absolute;
+  left: -18px;
+  height: 20px;
+  top: 3px;
+  width: 1px;
+  background-color: #fff;
+  content: "";
+}
+
+header#header li:last-child .dropdown{
+  position: absolute;
+  right: 0;
+  top: 100%;
+  padding: 3px 0px;
+  background-color: #fff;
+  width: 120px;
+  box-shadow: 0 7px 12px 0 rgba(0,0,0,.1), 0 10px 20px 0 rgba(0,0,0,.1);
+  display: none;
+}
+
+header#header li:last-child.open .dropdown{
+  display: block;
+}
+
+header#header li:last-child .dropdown a{
+  display: block;
+  text-align: left;
+  padding: 9px 12px;
+  color: #b8b8b8;
+  font-family: PierLight;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+header#header li:last-child .dropdown a:hover{
+  background-color: #353740;
+  color: #fff;
 }
 
 /* ----------------------------------------------------- */
