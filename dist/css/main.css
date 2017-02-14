@@ -193,6 +193,10 @@ header#header {
   padding-top: 32px;
 }
 
+body.loading header#header {
+  right: 17px;
+}
+
 header#header:after {
   content: '';
   display: block;
@@ -545,14 +549,14 @@ section#projects.ready .col:first-of-type a:nth-of-type(3) { transition: opacity
 section#projects.ready .col:last-of-type a:nth-of-type(3) { transition: opacity .4s ease 1.05s, transform .4s ease 1.05s, padding .3s; }
 
 section#projects.ready .col a:hover{
-  padding: 16px;
+  /* padding: 16px; */
   z-index: 9;
 }
 
 section#projects .col a .wrap{
   width: 100%;
   display: block;
-  transition: .33s;
+  transition: .26s;
   position: relative;
 }
 
@@ -578,6 +582,7 @@ section#projects .col a .bot h4{
 }
 
 section#projects .col a:hover .wrap{
+  transform: scale(.94);
   box-shadow: 0 22px 50px 0 rgba(0,0,0,.25), 0 60px 90px 0 rgba(0,0,0,.2);
 }
 
@@ -661,7 +666,7 @@ section#projects .col a.maximin:hover img.masked {
 /* ----------------------------------------------------- */
 section#skills{
   text-align: right;
-  margin: 20vh 0;
+  margin: 30vh 0;
   position: relative;
 }
 

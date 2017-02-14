@@ -27,6 +27,7 @@ webpackJsonp([0],[
 
 	  events: {
 	    'click header .lang': 'showLangSelect',
+	    'click header .scrollTo': 'scrollTo',
 	    'click': 'hideLangSelect',
 	  },
 
@@ -34,6 +35,13 @@ webpackJsonp([0],[
 
 	  initialize: function(params) {
 
+	  },
+
+	  scrollTo: function(e) {
+
+	    var section = this.$el.find(e.currentTarget).data('section');
+	    $('html, body').animate( { scrollTop: $('#'+section).offset().top }, 750 );
+	    return this;
 	  },
 
 	  //-------------------------------------
