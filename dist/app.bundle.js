@@ -44,6 +44,9 @@ webpackJsonp([0],[
 	    Backbone.trigger('window:scroll', e);
 	  }, 20),
 
+	  //-------------------------------------
+	  // Show Language Dropdown
+	  //-------------------------------------
 	  showLangSelect: function(e) {
 
 	    e.stopPropagation();
@@ -51,6 +54,9 @@ webpackJsonp([0],[
 	    return this;
 	  },
 
+	  //-------------------------------------
+	  // Hide Language Dropdown
+	  //-------------------------------------
 	  hideLangSelect: function(e) {
 
 	    this.$el.find('header .lang').removeClass('open');
@@ -88,11 +94,14 @@ webpackJsonp([0],[
 	    // Apparitions
 	    $('section').appear();
 	    $('section').on('appear', function(event, $els) { $els.addClass('ready'); });
-	    //$('section').on('disappear', function(event, $els) { $els.removeClass('ready'); });
+	    $('section').on('disappear', function(event, $els) { $els.removeClass('ready'); });
 
 	    return this;
 	  },
 
+	  //-------------------------------------
+	  // Detect Language
+	  //-------------------------------------
 	  getLang: function() {
 
 	    var lang =  window.location.pathname.slice(1);
@@ -111,6 +120,9 @@ webpackJsonp([0],[
 	    return this;
 	  },
 
+	  //-------------------------------------
+	  // Render each section with current Language
+	  //-------------------------------------
 	  renderSections: function() {
 
 	    var that = this;
@@ -140,6 +152,45 @@ webpackJsonp([0],[
 	    return promises;
 	  },
 
+	  // ------------------------------------------------
+	  // Preload all pictures, return percentage
+	  // ------------------------------------------------
+	  preloadAll: function() {
+
+	    var that = this;
+	    var ready = [];
+
+	    var total = this.$el.find('.preload').length;
+	    var percent = 0;
+
+	    this.$el.find('.preload').each(function(i) {
+
+
+	      var defer = q.defer();
+
+	      var $this = $(this);
+	      var url = $this.data('src');
+	      var img = new Image();
+	      img.src = url;
+	      img.onload = function() {
+
+	        percent += 100/total;
+
+	        that.$el.find('.loader .percent').css('height', percent+'%');
+
+	        if ($this.hasClass('to-bg')) $this.css('background-image', 'url('+url+')');
+	        else $this.attr('src', url);
+
+	        $this.removeClass('preload');
+	        defer.resolve(url);
+	      };
+
+	      ready.push(defer.promise);
+	    });
+
+	    return ready;
+	  },
+
 	  render: function() {
 
 	    var that = this;
@@ -153,6 +204,8 @@ webpackJsonp([0],[
 	    return q.fcall(that.getLang.bind(that))
 	    .then(that.renderSections.bind(that))
 	    .all()
+	    .then(that.preloadAll.bind(that))
+	    .all()
 	    .then(function() {
 
 	      return [
@@ -163,6 +216,13 @@ webpackJsonp([0],[
 	    .delay(600)
 	    .then(function() {
 
+	      that.$el.find('.loader').fadeOut(400);
+	      return that;
+	    })
+	    .delay(1000)
+	    .then(function() {
+
+	      that.$el.removeClass('loading');
 	      that.$el.find('#home').addClass('ready');
 	      return that;
 	    });
@@ -440,6 +500,11 @@ webpackJsonp([0],[
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
+	    skills: {
+	      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+	      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+	      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+	    }
 	  },
 
 	  eng: {
@@ -454,6 +519,11 @@ webpackJsonp([0],[
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
+	    skills: {
+	      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+	      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+	      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+	    }
 	  },
 
 	  de: {
@@ -468,6 +538,11 @@ webpackJsonp([0],[
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
+	    skills: {
+	      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+	      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+	      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+	    }
 	  },
 
 	  ita: {
@@ -482,6 +557,11 @@ webpackJsonp([0],[
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
+	    skills: {
+	      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+	      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+	      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+	    }
 	  },
 	}
 

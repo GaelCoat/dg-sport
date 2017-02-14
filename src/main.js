@@ -33,6 +33,9 @@ var Main = Backbone.View.extend({
     Backbone.trigger('window:scroll', e);
   }, 20),
 
+  //-------------------------------------
+  // Show Language Dropdown
+  //-------------------------------------
   showLangSelect: function(e) {
 
     e.stopPropagation();
@@ -40,6 +43,9 @@ var Main = Backbone.View.extend({
     return this;
   },
 
+  //-------------------------------------
+  // Hide Language Dropdown
+  //-------------------------------------
   hideLangSelect: function(e) {
 
     this.$el.find('header .lang').removeClass('open');
@@ -77,11 +83,14 @@ var Main = Backbone.View.extend({
     // Apparitions
     $('section').appear();
     $('section').on('appear', function(event, $els) { $els.addClass('ready'); });
-    //$('section').on('disappear', function(event, $els) { $els.removeClass('ready'); });
+    $('section').on('disappear', function(event, $els) { $els.removeClass('ready'); });
 
     return this;
   },
 
+  //-------------------------------------
+  // Detect Language
+  //-------------------------------------
   getLang: function() {
 
     var lang =  window.location.pathname.slice(1);
@@ -100,6 +109,9 @@ var Main = Backbone.View.extend({
     return this;
   },
 
+  //-------------------------------------
+  // Render each section with current Language
+  //-------------------------------------
   renderSections: function() {
 
     var that = this;
@@ -129,6 +141,45 @@ var Main = Backbone.View.extend({
     return promises;
   },
 
+  // ------------------------------------------------
+  // Preload all pictures, return percentage
+  // ------------------------------------------------
+  preloadAll: function() {
+
+    var that = this;
+    var ready = [];
+
+    var total = this.$el.find('.preload').length;
+    var percent = 0;
+
+    this.$el.find('.preload').each(function(i) {
+
+
+      var defer = q.defer();
+
+      var $this = $(this);
+      var url = $this.data('src');
+      var img = new Image();
+      img.src = url;
+      img.onload = function() {
+
+        percent += 100/total;
+
+        that.$el.find('.loader .percent').css('height', percent+'%');
+
+        if ($this.hasClass('to-bg')) $this.css('background-image', 'url('+url+')');
+        else $this.attr('src', url);
+
+        $this.removeClass('preload');
+        defer.resolve(url);
+      };
+
+      ready.push(defer.promise);
+    });
+
+    return ready;
+  },
+
   render: function() {
 
     var that = this;
@@ -142,6 +193,8 @@ var Main = Backbone.View.extend({
     return q.fcall(that.getLang.bind(that))
     .then(that.renderSections.bind(that))
     .all()
+    .then(that.preloadAll.bind(that))
+    .all()
     .then(function() {
 
       return [
@@ -152,6 +205,13 @@ var Main = Backbone.View.extend({
     .delay(600)
     .then(function() {
 
+      that.$el.find('.loader').fadeOut(400);
+      return that;
+    })
+    .delay(1000)
+    .then(function() {
+
+      that.$el.removeClass('loading');
       that.$el.find('#home').addClass('ready');
       return that;
     });

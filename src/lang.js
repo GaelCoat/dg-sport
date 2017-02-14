@@ -13,6 +13,11 @@ module.exports = {
       quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
     },
+    skills: {
+      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+    }
   },
 
   eng: {
@@ -27,6 +32,11 @@ module.exports = {
       quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
     },
+    skills: {
+      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+    }
   },
 
   de: {
@@ -41,6 +51,11 @@ module.exports = {
       quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
     },
+    skills: {
+      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+    }
   },
 
   ita: {
@@ -55,5 +70,10 @@ module.exports = {
       quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
     },
+    skills: {
+      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
+      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
+      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+    }
   },
 }

@@ -8,7 +8,9 @@ head
   link(href="css/normalize.css", rel="stylesheet", type="text/css")
   link(href="css/main.css", rel="stylesheet", type="text/css")
   link(href="css/responsive.css", rel="stylesheet", type="text/css")
-body
+
+
+body.loading
 
   include ./subviews/header
   section#home
@@ -17,6 +19,11 @@ body
   section#thinking
   section#us
   section#contact
+  .loader
+    .align
+    .centered
+      .percent
+      img(src='./img/logo-reversed.svg')
 
 .templates
   include ./templates
@@ -24,4 +31,3 @@ body
 //- Webpack Bundles
 script(src='./vendor.bundle.js')
 script(src='./app.bundle.js')
-

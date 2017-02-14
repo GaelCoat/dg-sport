@@ -497,15 +497,16 @@ section#projects .col .year span{
   transition: .3s;
 }
 
+section#projects .col:first-of-type .year{
+  left: -15%;
+  top: -16%;
+  transition: .4s ease 0s;
+}
+
 section#projects.ready .col .year{
   opacity: 1;
   transform: translate(0, 0);
   transition: .4s ease .6s;
-}
-
-section#projects .col:first-of-type .year{
-  left: -15%;
-  top: -16%;
 }
 
 section#projects .col:last-of-type .year{
@@ -533,15 +534,15 @@ section#projects .col a{
 section#projects.ready .col a{
   opacity: 1;
   transform: translate(0, 0);
-  transition: opacity .4s ease .3s, transform .4s ease .3s, padding .2s;
+  transition: opacity .4s ease .3s, transform .4s ease .3s, padding .3s;
 }
 
-section#projects.ready .col:first-of-type a:nth-of-type(1) { transition: opacity .4s ease .3s, transform .4s ease .3s, padding .2s; }
-section#projects.ready .col:last-of-type a:nth-of-type(1) { transition: opacity .4s ease .45s, transform .4s ease .45s, padding .2s; }
-section#projects.ready .col:first-of-type a:nth-of-type(2) { transition: opacity .4s ease .6s, transform .4s ease .6s, padding .2s; }
-section#projects.ready .col:last-of-type a:nth-of-type(2) { transition: opacity .4s ease .75s, transform .4s ease .75s, padding .2s; }
-section#projects.ready .col:first-of-type a:nth-of-type(3) { transition: opacity .4s ease .9s, transform .4s ease .9s, padding .2s; }
-section#projects.ready .col:last-of-type a:nth-of-type(3) { transition: opacity .4s ease 1.05s, transform .4s ease 1.05s, padding .2s; }
+section#projects.ready .col:first-of-type a:nth-of-type(1) { transition: opacity .4s ease .3s, transform .4s ease .3s, padding .3s; }
+section#projects.ready .col:last-of-type a:nth-of-type(1) { transition: opacity .4s ease .45s, transform .4s ease .45s, padding .3s; }
+section#projects.ready .col:first-of-type a:nth-of-type(2) { transition: opacity .4s ease .6s, transform .4s ease .6s, padding .3s; }
+section#projects.ready .col:last-of-type a:nth-of-type(2) { transition: opacity .4s ease .75s, transform .4s ease .75s, padding .3s; }
+section#projects.ready .col:first-of-type a:nth-of-type(3) { transition: opacity .4s ease .9s, transform .4s ease .9s, padding .3s; }
+section#projects.ready .col:last-of-type a:nth-of-type(3) { transition: opacity .4s ease 1.05s, transform .4s ease 1.05s, padding .3s; }
 
 section#projects.ready .col a:hover{
   padding: 16px;
@@ -551,7 +552,7 @@ section#projects.ready .col a:hover{
 section#projects .col a .wrap{
   width: 100%;
   display: block;
-  transition: .2s;
+  transition: .33s;
   position: relative;
 }
 
@@ -595,7 +596,7 @@ section#projects .col a img{
 }
 
 section#projects .col a:hover img:first-child{
-  transition: opacity .33s ease;
+  transition: opacity .5s ease;
   opacity: 0;
 }
 
@@ -615,8 +616,8 @@ section#projects .col a.thauvin img.masked {
 }
 
 section#projects .col a.thauvin:hover img.masked {
-  -webkit-animation: mask-play .7s steps(74) forwards .33s;
-          animation: mask-play .7s steps(74) forwards .33s;
+  -webkit-animation: mask-play .7s steps(74) forwards .5s;
+          animation: mask-play .7s steps(74) forwards .5s;
 }
 
 section#projects .col a.maximin img.masked {
@@ -703,9 +704,57 @@ section#skills .row ul li:first-child{
   margin-left: 0%;
 }
 
+section#skills .row ul figure{
+  display: inline-block;
+  margin: 0;
+}
+
+section#skills.ready .row ul li:nth-child(1) figure{
+  /* background-image: url(../img/icons/ui-sprite-110f.jpg); */
+  background-size: 100% 11000%;
+  background-position: 50% 0;
+  -webkit-animation: spriting 2.5s steps(109) forwards .44s;
+          animation: spriting 2.5s steps(109) forwards .44s;
+}
+
+section#skills.ready .row ul li:nth-child(2) figure{
+  /* background-image: url(../img/icons/identity-sprite-170f.jpg); */
+  background-size: 100% 17000%;
+  background-position: 50% 0;
+  -webkit-animation: spriting 3s steps(169) forwards .88s;
+          animation: spriting 3s steps(169) forwards .88s;
+}
+
+section#skills.ready .row ul li:nth-child(3) figure{
+  /* background-image: url(../img/icons/content-sprite-80f.jpg); */
+  background-size: 100% 8000%;
+  background-position: 50% 0;
+  -webkit-animation: spriting 2s steps(79) forwards 1.32s;
+          animation: spriting 2s steps(79) forwards 1.32s;
+}
+
+@-webkit-keyframes spriting {
+  from {
+    background-position: 50% 0;
+  }
+  to {
+    background-position: 50% 100%;
+  }
+}
+
+@keyframes spriting {
+    from {
+    background-position: 50% 0;
+  }
+  to {
+    background-position: 50% 100%;
+  }
+}
+
 section#skills .row ul img{
   display: block;
   margin: 0 auto;
+  opacity: 0;
 }
 
 section#skills .row ul span{
@@ -714,12 +763,35 @@ section#skills .row ul span{
   font-size: 20px;
   margin-bottom: 4px;
   margin-top: 24px;
+
+  opacity: 0;
+  transform: translate(0, 16px);
 }
 
 section#skills .row ul p{
   display: block;
   margin: 0 auto;
+
+  opacity: 0;
+  transform: translate(0, 16px);
 }
+
+section#skills.ready .row ul span{
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: .4s ease .45s;
+}
+
+section#skills.ready .row ul p{
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: .4s ease .6s;
+}
+
+section#skills.ready .row ul li:nth-child(2) span{ transition: .4s ease .88s; }
+section#skills.ready .row ul li:nth-child(2) p{ transition: .4s ease 1.03s; }
+section#skills.ready .row ul li:nth-child(3) span{ transition: .4s ease 1.33s; }
+section#skills.ready .row ul li:nth-child(3) p{ transition: .4s ease 1.48s; }
 
 
 /* ----------------------------------------------------- */
@@ -983,4 +1055,49 @@ section#contact.ready span{
 
 section#contact.ready span:last-of-type{
   transition: .4s ease .6s;
+}
+
+.loader{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 999;
+  text-align: center;
+}
+
+.loader img{
+  height: 6vw;
+  position: relative;
+  z-index: 9;
+  display: block;
+}
+
+.loader .centered{
+  position: relative;
+  overflow: hidden;
+  font-size: 0;
+}
+
+.loader .centered:before{
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  background-color: #b8b8b8;
+  content: "";
+}
+
+.loader .centered .percent{
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 0px;
+  background-color: #353740;
+  transition: .4s;
+  height: 0%;
+  max-height: 100%;
 }
