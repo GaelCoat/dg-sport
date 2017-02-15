@@ -12,6 +12,7 @@ var options = {
       "underscore",
       "jquery",
       "backbone",
+      "backbone.marionette",
       "q",
     ]
   },
@@ -59,6 +60,7 @@ var options = {
         _: 'underscore',
         q: 'q',
         Backbone: 'backbone',
+        Marionette: 'backbone.marionette',
       }),
     ]
   ),

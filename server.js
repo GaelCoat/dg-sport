@@ -13,7 +13,14 @@ app.set('view engine', 'pug')
 // Routing
 app.use(express.static(__dirname + '/dist'));
 
-app.get('*', function (req, res) {
+app.route('/').all(function (req, res) {
   res.render('index');
 });
 
+app.route('/:lang').get(function (req, res) {
+  res.render('index');
+});
+
+app.route('/:lang/:work').get(function (req, res) {
+  res.render('index');
+});

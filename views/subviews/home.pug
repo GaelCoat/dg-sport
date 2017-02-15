@@ -3,10 +3,17 @@
   figure.transit.yellow
     .align
     img.preload(data-src='./img/home.png')
+    <% if (!isMobile) {%>
     .block
+    <% } %>
 .align
 .row.centered
+  <% if (!isMobile) {%>
   .line
+  <% } %>
   h1.black-clr
     span DG SPORT
+    <% if (isMobile) {%>
+    p AGENCY
+    <% } %>
   p.grey-clr {{lang.subtitle}}

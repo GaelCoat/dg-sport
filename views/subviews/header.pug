@@ -5,11 +5,19 @@ header#header
       li.scrollTo(data-section='projects') Work
       li.scrollTo(data-section='skills') About
       li.scrollTo(data-section='contact') Contact
-      li.lang
+      li.lang.drop-lang
         span Eng
         img.preload(data-src='./img/arrow.svg')
         .dropdown
-          a(href='/eng') English
-          a(href='/fr') Français
-          a(href='/de') Deutsch
-          a(href='/ita') Italiano
+          a(href='/eng', regular) English
+          a(href='/fr', regular) Français
+          a(href='/de', regular) Deutsch
+          a(href='/ita', regular) Italiano
+    .show-lang.drop-lang
+      span Eng
+      img.preload(data-src='./img/arrow.svg')
+      .dropdown
+        a(href='/eng', regular) English
+        a(href='/fr', regular) Français
+        a(href='/de', regular) Deutsch
+        a(href='/ita', regular) Italiano

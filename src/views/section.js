@@ -1,3 +1,4 @@
+var isMobile = require('../libs/isMobile');
 
 module.exports = Backbone.View.extend({
 
@@ -24,7 +25,8 @@ module.exports = Backbone.View.extend({
     .then(function() {
 
       that.$el.html(that.tpl({
-        lang: that.lang
+        lang: that.lang,
+        isMobile: isMobile
       }));
       return that;
     });

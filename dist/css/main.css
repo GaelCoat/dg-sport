@@ -75,6 +75,12 @@ body.loading{
   padding-right: 17px;
 }
 
+body.mobile.modal-open,
+body.mobile.loading{
+  overflow: hidden;
+  padding-right: 0px;
+}
+
 h1 {
   font-family: PierBlack;
   font-size: 6.75vw;
@@ -208,20 +214,54 @@ header#header img.logo{
   height: 45px;
 }
 
+header#header .show-lang{
+  float: right;
+  display: none;
+  padding: 12px 8px 12px 20px;
+  font-size: 0;
+  font-family: Pier;
+  color: #fff;
+  line-height: 1;
+  border: 2px solid #fff;
+  position: relative;
+}
+
+header#header .show-lang span{
+  display: inline-block;
+  vertical-align: middle;
+  text-transform: capitalize;
+  font-size: 4vw;
+}
+
+header#header .show-lang img{
+  display: inline-block;
+  vertical-align: middle;
+  width: 6vw;
+}
+
 header#header ul{
   float: right;
   text-align: right;
+}
+
+body.mobile header#header .show-lang{
+  display: block;
+}
+
+body.mobile header#header ul{
+  display: none;
 }
 
 header#header li{
   display: inline-block;
   vertical-align: middle;
   color: #fff;
-  font-family: PierLight;
-  font-size: 18px;
+  font-family: Pier;
+  font-size: 17px;
   margin-left: 18px;
   cursor: pointer;
   padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
 }
 
 header#header li:hover{
@@ -255,7 +295,7 @@ header#header li:last-child:before{
   content: "";
 }
 
-header#header li:last-child .dropdown{
+header#header .drop-lang .dropdown{
   position: absolute;
   right: 0;
   top: 100%;
@@ -266,11 +306,11 @@ header#header li:last-child .dropdown{
   display: none;
 }
 
-header#header li:last-child.open .dropdown{
+header#header .drop-lang.open .dropdown{
   display: block;
 }
 
-header#header li:last-child .dropdown a{
+header#header .drop-lang .dropdown a{
   display: block;
   text-align: left;
   padding: 9px 12px;
@@ -280,7 +320,7 @@ header#header li:last-child .dropdown a{
   text-decoration: none;
 }
 
-header#header li:last-child .dropdown a:hover{
+header#header .drop-lang .dropdown a:hover{
   background-color: #353740;
   color: #fff;
 }
@@ -338,7 +378,7 @@ section#home .col img{
   display: inline-block;
   vertical-align: middle;
   opacity: 0;
-  max-height: 100%;
+  max-height: 75%;
 }
 
 section#home.ready .col img{
@@ -362,13 +402,35 @@ section#home .row h1 span{
   opacity: 0;
 }
 
-section#home.ready .row h1 span{
+body:not(.mobile) section#home.ready .row h1 span{
   opacity: 1;
   transition: opacity 0s .83s;
 }
 
-section#home .row h1:before,
-section#home .row h1:after{
+body.mobile section#home .row h1 span{
+  transform: translate(0, 50%);
+  display: block;
+}
+
+body.mobile section#home.ready .row h1 span{
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: .4s ease .6s;
+}
+
+body.mobile section#home .row h1 p{
+  transform: translate(0, 80%);
+  opacity: 0;
+}
+
+body.mobile section#home.ready .row h1 p{
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: .4s ease 1.5s;
+}
+
+body:not(.mobile) section#home .row h1:before,
+body:not(.mobile) section#home .row h1:after{
   position: absolute;
   left: 0;
   right: 0;
@@ -379,23 +441,23 @@ section#home .row h1:after{
   transform: translate(0, 100%);
 }
 
-section#home .row h1:before{
+body:not(.mobile) section#home .row h1:before{
   background-color: #353740;
 }
 
-section#home .row h1:after{
+body:not(.mobile) section#home .row h1:after{
   background-color: #fad019;
 }
 
 
-section#home.ready .row h1:before,
-section#home.ready .row h1:after{
+body:not(.mobile) section#home.ready .row h1:before,
+body:not(.mobile) section#home.ready .row h1:after{
   transition: 1s;
   transform: translate(0, -100%);
 }
 
-section#home.ready .row h1:before{ transition-delay: .5s; }
-section#home.ready .row h1:after{  transition-delay: .7s; }
+body:not(.mobile) section#home.ready .row h1:before{ transition-delay: .5s; }
+body:not(.mobile) section#home.ready .row h1:after{  transition-delay: .7s; }
 
 section#home .row p{
   font-size: 22px;
@@ -581,7 +643,7 @@ section#projects .col a .bot h4{
   letter-spacing: 1px;
 }
 
-section#projects .col a:hover .wrap{
+body:not(.mobile) section#projects .col a:hover .wrap{
   transform: scale(.94);
   box-shadow: 0 22px 50px 0 rgba(0,0,0,.25), 0 60px 90px 0 rgba(0,0,0,.2);
 }
@@ -600,7 +662,7 @@ section#projects .col a img{
   display: block;
 }
 
-section#projects .col a:hover img:first-child{
+body:not(.mobile) section#projects .col a:hover img:first-child{
   transition: opacity .5s ease;
   opacity: 0;
 }
@@ -611,7 +673,7 @@ section#projects .col a img.masked{
   top: 0;
 }
 
-section#projects .col a.thauvin img.masked {
+body:not(.mobile) section#projects .col a.thauvin img.masked {
   -webkit-mask: url(../img/sprite-1.png);
           mask: url(../img/sprite-1.png);
   -webkit-mask-size: 7500% 100%;
@@ -620,12 +682,12 @@ section#projects .col a.thauvin img.masked {
           mask-position: 100% 0;
 }
 
-section#projects .col a.thauvin:hover img.masked {
+body:not(.mobile) section#projects .col a.thauvin:hover img.masked {
   -webkit-animation: mask-play .7s steps(74) forwards .5s;
           animation: mask-play .7s steps(74) forwards .5s;
 }
 
-section#projects .col a.maximin img.masked {
+body:not(.mobile) section#projects .col a.maximin img.masked {
   -webkit-mask: url(../img/sprite-2.png);
           mask: url(../img/sprite-2.png);
   -webkit-mask-size: 7100% 100%;
@@ -634,7 +696,7 @@ section#projects .col a.maximin img.masked {
           mask-position: 100% 0;
 }
 
-section#projects .col a.maximin:hover img.masked {
+body:not(.mobile) section#projects .col a.maximin:hover img.masked {
   -webkit-animation: mask-play 1s steps(70) forwards .33s;
           animation: mask-play 1s steps(70) forwards .33s;
 }
@@ -784,19 +846,19 @@ section#skills .row ul p{
 section#skills.ready .row ul span{
   opacity: 1;
   transform: translate(0, 0);
-  transition: .4s ease .45s;
+  transition: opacity .4s ease .45s, transform .4s ease .45s;
 }
 
 section#skills.ready .row ul p{
   opacity: 1;
   transform: translate(0, 0);
-  transition: .4s ease .6s;
+  transition: opacity .4s ease .6s, transform .4s ease .6s;
 }
 
-section#skills.ready .row ul li:nth-child(2) span{ transition: .4s ease .88s; }
-section#skills.ready .row ul li:nth-child(2) p{ transition: .4s ease 1.03s; }
-section#skills.ready .row ul li:nth-child(3) span{ transition: .4s ease 1.33s; }
-section#skills.ready .row ul li:nth-child(3) p{ transition: .4s ease 1.48s; }
+section#skills.ready .row ul li:nth-child(2) span{ transition: opacity .4s ease .88s, transform .4s ease .88s; }
+section#skills.ready .row ul li:nth-child(2) p{ transition: opacity .4s ease 1.03s, transform .4s ease 1.03s; }
+section#skills.ready .row ul li:nth-child(3) span{ transition: opacity .4s ease 1.33s, transform .4s ease 1.33s; }
+section#skills.ready .row ul li:nth-child(3) p{ transition: opacity .4s ease 1.48s, transform .4s ease 1.48s; }
 
 
 /* ----------------------------------------------------- */
@@ -805,7 +867,8 @@ section#skills.ready .row ul li:nth-child(3) p{ transition: .4s ease 1.48s; }
 section#thinking{
   text-align: left;
   font-size: 0;
-  margin: 20vh 0;
+  margin: 30vh 0;
+  margin-top: 35vh;
 }
 
 section#thinking .row{
@@ -909,6 +972,23 @@ section#us .row{
   z-index: 3;
 }
 
+section#us .bg{
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
+section#us.ready .bg{
+  opacity: 1;
+  transition: opacity .55s ease;
+}
+
 section#us img{
   display: inline-block;
   vertical-align: middle;
@@ -961,7 +1041,7 @@ section#us.ready .row blockquote span{
   transition: opacity .4s ease .5s, transform .4s ease .5s;
 }
 
-section#us.ready .row blockquote span:last-child{
+body:not(.mobile) section#us.ready .row blockquote span:last-child{
   transition: .4s ease .7s;
 }
 
