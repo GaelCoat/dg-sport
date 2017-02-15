@@ -20,7 +20,7 @@ module.exports = {
     }
   },
 
-  eng: {
+  en: {
     home: {
       subtitle: '<span>Accompagne les sportifs de haut</span><span>niveau dans le développement de leur</span><span>communauté et d’une identité digitale</span>'
     },

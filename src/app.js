@@ -20,6 +20,8 @@ module.exports = Marionette.Application.extend({
 
   setLang: function(lang) {
 
+    console.log(lang);
+
     this.lang = lang;
 
     this.layout = new Layout({
