@@ -44,6 +44,18 @@ module.exports = Marionette.View.extend({
     return this;
   },
 
+  setSizes: function() {
+
+    var that = this;
+
+    this.$el.find('.setSize').each(function() {
+
+      $(this).height($(this).height());
+    });
+
+    return this;
+  },
+
   //-------------------------------------
   // Scroll Handle
   //-------------------------------------
@@ -201,6 +213,8 @@ module.exports = Marionette.View.extend({
     .then(that.preloadAll.bind(that))
     .all()
     .then(function() {
+
+      if (isMobile) that.setSizes();
 
       return [
         that.initAppears(),

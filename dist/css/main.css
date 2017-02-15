@@ -67,6 +67,7 @@ body{
   height: 100%;
   text-align: left;
   font-family: Pier;
+  -webkit-text-size-adjust: 100%;
 }
 
 body.modal-open,

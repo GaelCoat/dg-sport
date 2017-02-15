@@ -10,7 +10,7 @@
   }
 
   section#home .row {
-    margin-top: 40px;
+    margin-top: 75px;
   }
 
   section#skills .row ul li {
@@ -44,6 +44,10 @@
 
   section#us .row p {
     width: 70%;
+  }
+
+  section#home .col img {
+    margin-top: 8%;
   }
 }
 
@@ -109,7 +113,7 @@
 
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation:portrait) {
 
   .loader img {
     height: 20vw;
@@ -311,7 +315,7 @@
   }
 
   section#thinking .content p {
-    font-size: 3.5vw;
+    font-size: 4vw;
     line-height: 1.2;
     text-align: center;
   }
@@ -344,7 +348,7 @@
   }
 
   section#us .row blockquote {
-    font-size: 5.5vw;
+    font-size: 6vw;
   }
 
   section#us .row blockquote span {
@@ -377,7 +381,7 @@
   }
 
   section#contact span {
-    font-size: 3vw;
+    font-size: 4.5vw;
     padding: 12px;
   }
 

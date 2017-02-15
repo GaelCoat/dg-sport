@@ -1,11 +1,19 @@
 .row
   .content
+    <% if (!isMobile) {%>
     h2.black-clr
       span What
-      .clear
       span We Think
+    <% } else { %>
+    h2.black-clr
+      span What We Think
+    <% } %>
     p.grey-clr {{lang.txt}}
   aside
     figure.transit.black
     figure.transit.yellow
+    <% if (!isMobile) {%>
     blockquote.black-clr {{lang.quote}}
+    <% } else { %>
+    blockquote.black-clr {{lang.quoteRaw}}
+    <% } %>

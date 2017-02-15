@@ -3,10 +3,14 @@
   figure.transit.yellow
 .row
   .align
-  h2.black-clr
-    span What
-    .clear
-    span We Do
+  <% if (!isMobile) {%>
+    h2.black-clr
+      span What
+      span We Do
+    <% } else { %>
+    h2.black-clr
+      span What We Do
+    <% } %>
   ul
     li
       figure.preload.to-bg(data-src='./img/icons/ui-sprite-110f.jpg')
