@@ -9,7 +9,7 @@ module.exports = Marionette.AppRouter.extend({
 
   home: function() {
 
-    return this.setLang('en');
+    return this.setLang('fr');
   },
 
   languageSelect: function(lang) {

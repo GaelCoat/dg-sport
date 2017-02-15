@@ -100,7 +100,7 @@ webpackJsonp([0],[
 
 	  home: function() {
 
-	    return this.setLang('en');
+	    return this.setLang('fr');
 	  },
 
 	  languageSelect: function(lang) {
