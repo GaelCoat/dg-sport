@@ -15,3 +15,24 @@ script(type="text/template", id="tpl-contact")
 
 script(type="text/template", id="tpl-skills")
   include ./subviews/skills
+
+script(type="text/template", id="tpl-projects-each")
+  a(href='/{{lang}}/{{project.id}}', class='{{project.id}}')
+    .wrap
+      img.preload(data-src='{{project.preview}}')
+      <% if (!isMobile) {%>
+      img.masked.preload(data-src='{{project.preview}}')
+      <% } %>
+      .bot
+        h5 {{project.type}}
+        h4 {{project.name}}
+
+script(type="text/template", id="tpl-project")
+  include ./subviews/project
+
+script(type="text/template", id="tpl-project-other")
+  li
+    a(href='/{{lang}}/{{other.id}}')
+      .cover
+      h5.black-clr {{other.name}}
+      span.grey-clr {{other.type}}

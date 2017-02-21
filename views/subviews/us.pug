@@ -1,5 +1,9 @@
 .bg.yellow.preload.to-bg(data-src='./img/us.jpg')
   //-img.preload(data-src='./img/us.jpg')
 .row
+  <% if (!isMobile) {%>
   blockquote {{lang.quote}}
+  <% } else { %>
+  blockquote {{lang.quoteRaw}}
+  <% } %>
   p {{lang.txt}}

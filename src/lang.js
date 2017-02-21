@@ -12,6 +12,7 @@ module.exports = {
     },
     us: {
       quote: '<span>Nous nous battons chaque jour pour ériger</span><span>les sportifs de haut niveau au rang d’idole.</span><span>Nous bâtissons les héros de demain.</span>',
+      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous remettons sans cesse en cause le statu quo afin de baser nos workflows sur l’innovation et le sens du détail. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle qui nous permet d\'être un véritable partenaire de leur carrière.'
     },
     skills: {
@@ -32,6 +33,7 @@ module.exports = {
     },
     us: {
       quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
     },
     skills: {
@@ -52,6 +54,7 @@ module.exports = {
     },
     us: {
       quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
     },
     skills: {
@@ -72,6 +75,7 @@ module.exports = {
     },
     us: {
       quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
       txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
     },
     skills: {

@@ -14,6 +14,8 @@ module.exports = Marionette.Application.extend({
 
     this.router = new Router();
     this.router.on('app:lang', this.setLang.bind(this));
+    this.router.on('router:home', this.unloadProject.bind(this));
+    this.router.on('project:load', this.loadProject.bind(this));
 
     return this;
   },
@@ -38,8 +40,15 @@ module.exports = Marionette.Application.extend({
     return this;
   },
 
-  load: function(params) {
+  loadProject: function(id) {
 
-    console.log('LOAD', params);
+    this.layout.renderProject(id);
+    return this;
+  },
+
+  unloadProject: function() {
+
+    if (this.layout) this.layout.unloadProject();
+    return this;
   },
 });

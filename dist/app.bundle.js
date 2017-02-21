@@ -51,6 +51,8 @@ webpackJsonp([0],[
 
 	    this.router = new Router();
 	    this.router.on('app:lang', this.setLang.bind(this));
+	    this.router.on('router:home', this.unloadProject.bind(this));
+	    this.router.on('project:load', this.loadProject.bind(this));
 
 	    return this;
 	  },
@@ -75,9 +77,16 @@ webpackJsonp([0],[
 	    return this;
 	  },
 
-	  load: function(params) {
+	  loadProject: function(id) {
 
-	    console.log('LOAD', params);
+	    this.layout.renderProject(id);
+	    return this;
+	  },
+
+	  unloadProject: function() {
+
+	    if (this.layout) this.layout.unloadProject();
+	    return this;
 	  },
 	});
 
@@ -89,7 +98,7 @@ webpackJsonp([0],[
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Marionette) {
+	/* WEBPACK VAR INJECTION */(function(Marionette, q) {
 	module.exports = Marionette.AppRouter.extend({
 
 	  routes: {
@@ -98,40 +107,54 @@ webpackJsonp([0],[
 	    ':lang/:project': 'project',
 	  },
 
+	  lang: null,
+
 	  home: function() {
 
+	    this.trigger('router:home');
 	    return this.setLang('fr');
 	  },
 
 	  languageSelect: function(lang) {
 
+	    this.trigger('router:home');
 	    return this.setLang(lang);
 	  },
 
-	  project: function(lang, project) {
+	  project: function(lang, id) {
 
-	    console.log(project);
-	    return this;
+	    var that = this;
+
+	    return q.fcall(function() {
+
+	      if (!that.lang) return that.setLang(lang);
+	      return that;
+	    })
+	    .then(function() {
+
+	      return that.loadProject(id);
+	    });
 	  },
 
 	  setLang: function(lang) {
 
 	    var langs = ['fr', 'en', 'de', 'ita'];
 
-	    if (langs.indexOf(lang) === -1) return this.navigate('/', true);
+	    if (langs.indexOf(lang) === -1) return this.navigate('/fr/', true);
 
+	    this.lang = lang;
 	    this.trigger('app:lang', lang);
 	    return this;
 	  },
 
-	  loadView: function(path, params) {
+	  loadProject: function(id) {
 
-	    this.trigger('view:load', path, params);
+	    this.trigger('project:load', id);
 	    return this;
 	  }
 	});
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(10)))
 
 /***/ },
 /* 9 */
@@ -141,7 +164,10 @@ webpackJsonp([0],[
 	var isMobile = __webpack_require__(15);
 	var Parallax = __webpack_require__(16);
 	var Section = __webpack_require__(17);
-	var Lang = __webpack_require__(18)
+	var Works = __webpack_require__(19);
+	var Lang = __webpack_require__(18);
+	var Project = __webpack_require__(21);
+	var Projects = __webpack_require__(20);
 
 	module.exports = Marionette.View.extend({
 
@@ -155,14 +181,17 @@ webpackJsonp([0],[
 	  },
 
 	  lang: null,
+	  currentProject: null,
 
 	  initialize: function(params) {
 
 	    this.lang = App.lang;
-
 	    this.$el.find('header .drop-lang > span').text(this.lang);
 	  },
 
+	  //-------------------------------------
+	  // Soft Redirect
+	  //-------------------------------------
 	  handleRedirect: function(e) {
 
 	    var href = $(e.currentTarget).attr('href');
@@ -176,6 +205,9 @@ webpackJsonp([0],[
 	    return this;
 	  },
 
+	  //-------------------------------------
+	  // Basic anchor
+	  //-------------------------------------
 	  scrollTo: function(e) {
 
 	    var section = this.$el.find(e.currentTarget).data('section');
@@ -183,6 +215,9 @@ webpackJsonp([0],[
 	    return this;
 	  },
 
+	  //-------------------------------------
+	  // Mobile TabBar Work-Around
+	  //-------------------------------------
 	  setSizes: function() {
 
 	    var that = this;
@@ -261,6 +296,29 @@ webpackJsonp([0],[
 	  },
 
 	  //-------------------------------------
+	  // Render unique project
+	  //-------------------------------------
+	  renderProject: function(id) {
+
+	    this.$el.addClass('modal-open');
+	    this.$el.find('article#project').empty();
+
+	    this.currentProject = new Project({
+	      model: Projects[id],
+	      lang: this.lang,
+	      el: this.$el.find('article#project')
+	    });
+
+	    return this.currentProject.render();
+	  },
+
+	  unloadProject: function() {
+
+	    if (this.currentProject) this.currentProject.unload();
+	    return this;
+	  },
+
+	  //-------------------------------------
 	  // Render each section with current Language
 	  //-------------------------------------
 	  renderSections: function() {
@@ -278,11 +336,23 @@ webpackJsonp([0],[
 
 	      q.fcall(function() {
 
-	        var view = new Section({
-	          el: $this,
-	          id: $this.attr('id'),
-	          lang: Lang[that.lang],
-	        });
+	        if ($this.attr('id') === 'projects') {
+
+	          var view = new Works({
+	            el: $this,
+	            id: $this.attr('id'),
+	            lang: that.lang,
+	          });
+
+	        } else {
+
+	          var view = new Section({
+	            el: $this,
+	            id: $this.attr('id'),
+	            lang: Lang[that.lang],
+	          });
+
+	        }
 
 	        return view.render();
 	      })
@@ -650,6 +720,7 @@ webpackJsonp([0],[
 	    },
 	    us: {
 	      quote: '<span>Nous nous battons chaque jour pour ériger</span><span>les sportifs de haut niveau au rang d’idole.</span><span>Nous bâtissons les héros de demain.</span>',
+	      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous remettons sans cesse en cause le statu quo afin de baser nos workflows sur l’innovation et le sens du détail. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle qui nous permet d\'être un véritable partenaire de leur carrière.'
 	    },
 	    skills: {
@@ -670,6 +741,7 @@ webpackJsonp([0],[
 	    },
 	    us: {
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+	      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
 	    skills: {
@@ -690,6 +762,7 @@ webpackJsonp([0],[
 	    },
 	    us: {
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+	      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
 	    skills: {
@@ -710,6 +783,7 @@ webpackJsonp([0],[
 	    },
 	    us: {
 	      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
+	      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
 	      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
 	    },
 	    skills: {
@@ -720,6 +794,194 @@ webpackJsonp([0],[
 	  },
 	}
 
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Backbone, _, $, q) {var isMobile = __webpack_require__(15);
+	var Projects = __webpack_require__(20);
+
+	module.exports = Backbone.View.extend({
+
+	  events: {},
+
+	  lang: 'fr',
+
+	  initialize: function(params) {
+
+	    this.lang = params.lang;
+	    this.tpl = _.template($('#tpl-projects').html());
+	  },
+
+	  renderProjects: function() {
+
+	    var that = this;
+	    var els = [];
+
+	    _.each(Projects, function(project) {
+
+	      var tpl = _.template($('#tpl-projects-each').html());
+	      els.push(tpl({ project: project, isMobile: isMobile, lang: that.lang }));
+	    });
+
+	    return els;
+	  },
+
+	  dispatch: function(els) {
+
+	    var that = this;
+
+	    var split = _.partition(els, function(el, id) { return id % 2; });
+
+	    this.$el.find('.col.left-col').append(split[1]);
+	    this.$el.find('.col.right-col').append(split[0]);
+
+	    return that;
+	  },
+
+	  render: function() {
+
+	    var that = this;
+
+	    return q.fcall(function() {
+
+	      that.$el.html(that.tpl({
+	        lang: that.lang,
+	        isMobile: isMobile
+	      }));
+
+	      return that.renderProjects();
+	    })
+	    .then(that.dispatch.bind(that))
+	    .catch(function(err) {
+
+	      console.log(err);
+	    })
+
+	  },
+
+	});
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(10)))
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = {
+
+	  'thauvin': {
+	    id: 'thauvin',
+	    name: 'Florian Thauvin',
+	    type: 'Website',
+	    preview: './img/projects/thauvin/preview.jpg',
+	    banner: './img/projects/thauvin/banner.jpg',
+	    content: './img/projects/thauvin/content.jpg',
+	    year: '2017',
+	  },
+
+	  'st-maximin': {
+	    id: 'st-maximin',
+	    name: 'Allan St-Maximin',
+	    type: 'Website',
+	    preview: './img/projects/st-maximin/preview.jpg',
+	    banner: './img/projects/thauvin/banner.jpg',
+	    content: './img/projects/thauvin/content.jpg',
+	    year: '2017',
+	  },
+
+
+	}
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Backbone, _, $, q) {var isMobile = __webpack_require__(15);
+	var Projects = __webpack_require__(20);
+
+	module.exports = Backbone.View.extend({
+
+	  events: {},
+
+	  lang: 'fr',
+
+	  initialize: function(params) {
+
+	    this.lang = params.lang;
+	    this.tpl = _.template($('#tpl-project').html());
+
+	    console.log(params);
+	  },
+
+	  renderOthers: function() {
+
+	    var that = this;
+
+	    var els = [];
+
+	    var others = _.reject(Projects, function(item) {
+
+	      return item === that.model;
+	    });
+
+	    var selected = others.slice(0, 3);
+
+	    _.each(selected, function(other) {
+
+	      var tpl = _.template($('#tpl-project-other').html());
+	      var el = tpl({ other: other, lang: that.lang });
+	      var el = $(el);
+	      el.find('.cover').css('background-image', 'url('+other.preview+')');
+	      els.push(el);
+	    });
+
+	    this.$el.find('ul.others').append(els);
+
+	    return this;
+	  },
+
+	  render: function() {
+
+	    var that = this;
+
+	    return q.fcall(function() {
+
+	      that.$el.html(that.tpl({
+	        lang: that.lang,
+	        isMobile: isMobile,
+	        project: that.model
+	      }));
+
+	      return that;
+	    })
+	    .then(function() {
+
+	      that.renderOthers();
+	      that.$el.show(0).addClass('ready');
+	      return that;
+	    });
+	  },
+
+	  unload: function() {
+
+	    var that = this;
+
+	    this.$el.fadeOut(400, function() {
+
+	      that.$el.removeClass('ready');
+	      that.$el.empty();
+	      $('body').removeClass('modal-open')
+	    });
+	  },
+
+	});
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(10)))
 
 /***/ }
 ]);

@@ -2,7 +2,10 @@ var hope = require('../libs/appear');
 var isMobile = require('../libs/isMobile');
 var Parallax = require('./parallax');
 var Section = require('./section');
-var Lang = require('../lang')
+var Works = require('./projects');
+var Lang = require('../lang');
+var Project = require('./project');
+var Projects = require('../projects');
 
 module.exports = Marionette.View.extend({
 
@@ -16,14 +19,17 @@ module.exports = Marionette.View.extend({
   },
 
   lang: null,
+  currentProject: null,
 
   initialize: function(params) {
 
     this.lang = App.lang;
-
     this.$el.find('header .drop-lang > span').text(this.lang);
   },
 
+  //-------------------------------------
+  // Soft Redirect
+  //-------------------------------------
   handleRedirect: function(e) {
 
     var href = $(e.currentTarget).attr('href');
@@ -37,6 +43,9 @@ module.exports = Marionette.View.extend({
     return this;
   },
 
+  //-------------------------------------
+  // Basic anchor
+  //-------------------------------------
   scrollTo: function(e) {
 
     var section = this.$el.find(e.currentTarget).data('section');
@@ -44,6 +53,9 @@ module.exports = Marionette.View.extend({
     return this;
   },
 
+  //-------------------------------------
+  // Mobile TabBar Work-Around
+  //-------------------------------------
   setSizes: function() {
 
     var that = this;
@@ -122,6 +134,29 @@ module.exports = Marionette.View.extend({
   },
 
   //-------------------------------------
+  // Render unique project
+  //-------------------------------------
+  renderProject: function(id) {
+
+    this.$el.addClass('modal-open');
+    this.$el.find('article#project').empty();
+
+    this.currentProject = new Project({
+      model: Projects[id],
+      lang: this.lang,
+      el: this.$el.find('article#project')
+    });
+
+    return this.currentProject.render();
+  },
+
+  unloadProject: function() {
+
+    if (this.currentProject) this.currentProject.unload();
+    return this;
+  },
+
+  //-------------------------------------
   // Render each section with current Language
   //-------------------------------------
   renderSections: function() {
@@ -139,11 +174,23 @@ module.exports = Marionette.View.extend({
 
       q.fcall(function() {
 
-        var view = new Section({
-          el: $this,
-          id: $this.attr('id'),
-          lang: Lang[that.lang],
-        });
+        if ($this.attr('id') === 'projects') {
+
+          var view = new Works({
+            el: $this,
+            id: $this.attr('id'),
+            lang: that.lang,
+          });
+
+        } else {
+
+          var view = new Section({
+            el: $this,
+            id: $this.attr('id'),
+            lang: Lang[that.lang],
+          });
+
+        }
 
         return view.render();
       })
