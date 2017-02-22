@@ -36,7 +36,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Marionette) {var Router = __webpack_require__(8);
-	var Layout = __webpack_require__(9)
+	var Layout = __webpack_require__(13)
 
 	module.exports = Marionette.Application.extend({
 
@@ -154,20 +154,24 @@ webpackJsonp([0],[
 	  }
 	});
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(9)))
 
 /***/ },
-/* 9 */
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Marionette, $, _, Backbone, q) {var hope = __webpack_require__(14);
 	var isMobile = __webpack_require__(15);
 	var Parallax = __webpack_require__(16);
 	var Section = __webpack_require__(17);
-	var Works = __webpack_require__(19);
-	var Lang = __webpack_require__(18);
+	var Works = __webpack_require__(18);
+	var Lang = __webpack_require__(20);
 	var Project = __webpack_require__(21);
-	var Projects = __webpack_require__(20);
+	var Projects = __webpack_require__(19);
 
 	module.exports = Marionette.View.extend({
 
@@ -303,10 +307,21 @@ webpackJsonp([0],[
 	    this.$el.addClass('modal-open');
 	    this.$el.find('article#project').empty();
 
+	    if (this.currentProject) {
+
+	      var old = this.currentProject
+
+	      _.delay(function() {
+
+	        return old.unload(true);
+	      }, 1000);
+
+	    }
+
 	    this.currentProject = new Project({
 	      model: Projects[id],
 	      lang: this.lang,
-	      el: this.$el.find('article#project')
+	      //el: this.$el.find('article#project')
 	    });
 
 	    return this.currentProject.render();
@@ -450,13 +465,9 @@ webpackJsonp([0],[
 
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(4), __webpack_require__(3), __webpack_require__(2), __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(4), __webpack_require__(3), __webpack_require__(2), __webpack_require__(9)))
 
 /***/ },
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -700,10 +711,117 @@ webpackJsonp([0],[
 	});
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(9)))
 
 /***/ },
 /* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Backbone, _, $, q) {var isMobile = __webpack_require__(15);
+	var Projects = __webpack_require__(19);
+
+	module.exports = Backbone.View.extend({
+
+	  events: {},
+
+	  lang: 'fr',
+
+	  initialize: function(params) {
+
+	    this.lang = params.lang;
+	    this.tpl = _.template($('#tpl-projects').html());
+	  },
+
+	  renderProjects: function() {
+
+	    var that = this;
+	    var els = [];
+
+	    _.each(Projects, function(project) {
+
+	      var tpl = _.template($('#tpl-projects-each').html());
+	      els.push(tpl({ project: project, isMobile: isMobile, lang: that.lang }));
+	    });
+
+	    return els;
+	  },
+
+	  dispatch: function(els) {
+
+	    var that = this;
+
+	    var split = _.partition(els, function(el, id) { return id % 2; });
+
+	    this.$el.find('.col.left-col').append(split[1]);
+	    this.$el.find('.col.right-col').append(split[0]);
+
+	    return that;
+	  },
+
+	  render: function() {
+
+	    var that = this;
+
+	    return q.fcall(function() {
+
+	      that.$el.html(that.tpl({
+	        lang: that.lang,
+	        isMobile: isMobile
+	      }));
+
+	      return that.renderProjects();
+	    })
+	    .then(that.dispatch.bind(that))
+	    .catch(function(err) {
+
+	      console.log(err);
+	    })
+
+	  },
+
+	});
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(9)))
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = {
+
+	  'thauvin': {
+	    id: 'thauvin',
+	    name: 'Florian Thauvin',
+	    type: 'Website',
+	    preview: './img/projects/thauvin/preview.jpg',
+	    banner: './img/projects/thauvin/banner.jpg',
+	    mobile_banner: './img/projects/thauvin/mobile-banner.jpg',
+	    content: './img/projects/thauvin/content.jpg',
+	    link: 'http://florianthauvin.com/',
+	    year: '2017',
+	    brief: 'Nous avons développé le site de Florian Thauvin dans l’objectif de fédérer ses centaines de milliers de fans et de développer son image. Le but était de concevoir un site visuel, interractif et responsive mobile tout en ayant une richesse de contenus. Sur ce site, les visiteurs pourront ainsi retrouver les comptes officiels de Florian Thauvin. Ils auront également accès à sa fiche sportive tout comme à ses statistiques saison par saison. Une page est aussi réservée pour mettre en avant les sponsors de Florian Thauvin. Enfin pour une dimension de proximité, il y a une section réservée à ses photos Instagram.',
+	  },
+
+	  'st-maximin': {
+	    id: 'st-maximin',
+	    name: 'Allan St-Maximin',
+	    type: 'Website',
+	    preview: './img/projects/st-maximin/preview.jpg',
+	    banner: './img/projects/st-maximin/banner.jpg',
+	    mobile_banner: './img/projects/st-maximin/mobile-banner.jpg',
+	    content: './img/projects/st-maximin/content.jpg',
+	    link: 'http://www.allanstmaximin.com/',
+	    year: '2017',
+	    brief: 'Nous avons développé le site d’Allan Saint-Maximin pour améliorer sa visibilité et fédérer sa communauté de fans. Il y avait une volonté de développer un site interractif et responsive mobile comme de nombreux fans utilisent leur smartphone pour aller sur internet. Le tout, en respectant un cahier des charges spécifiques concernant son image. Le but est d’ancrer l’idée qu’Allan Saint-Maximin est un feu follet, à savoir un grand dribbleur, rapide et efficace. En plus de cela, l’idée était de mettre en avant ses comptes officiels ainsi que sa fiche sportive. Enfin pour renforcer les liens avec ses fans, nous mettons en avant une section dédiée à ses photos Instagram.',
+	  },
+
+
+	}
+
+
+/***/ },
+/* 20 */
 /***/ function(module, exports) {
 
 	
@@ -796,112 +914,11 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Backbone, _, $, q) {var isMobile = __webpack_require__(15);
-	var Projects = __webpack_require__(20);
-
-	module.exports = Backbone.View.extend({
-
-	  events: {},
-
-	  lang: 'fr',
-
-	  initialize: function(params) {
-
-	    this.lang = params.lang;
-	    this.tpl = _.template($('#tpl-projects').html());
-	  },
-
-	  renderProjects: function() {
-
-	    var that = this;
-	    var els = [];
-
-	    _.each(Projects, function(project) {
-
-	      var tpl = _.template($('#tpl-projects-each').html());
-	      els.push(tpl({ project: project, isMobile: isMobile, lang: that.lang }));
-	    });
-
-	    return els;
-	  },
-
-	  dispatch: function(els) {
-
-	    var that = this;
-
-	    var split = _.partition(els, function(el, id) { return id % 2; });
-
-	    this.$el.find('.col.left-col').append(split[1]);
-	    this.$el.find('.col.right-col').append(split[0]);
-
-	    return that;
-	  },
-
-	  render: function() {
-
-	    var that = this;
-
-	    return q.fcall(function() {
-
-	      that.$el.html(that.tpl({
-	        lang: that.lang,
-	        isMobile: isMobile
-	      }));
-
-	      return that.renderProjects();
-	    })
-	    .then(that.dispatch.bind(that))
-	    .catch(function(err) {
-
-	      console.log(err);
-	    })
-
-	  },
-
-	});
-
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(10)))
-
-/***/ },
-/* 20 */
-/***/ function(module, exports) {
-
-	module.exports = {
-
-	  'thauvin': {
-	    id: 'thauvin',
-	    name: 'Florian Thauvin',
-	    type: 'Website',
-	    preview: './img/projects/thauvin/preview.jpg',
-	    banner: './img/projects/thauvin/banner.jpg',
-	    content: './img/projects/thauvin/content.jpg',
-	    year: '2017',
-	  },
-
-	  'st-maximin': {
-	    id: 'st-maximin',
-	    name: 'Allan St-Maximin',
-	    type: 'Website',
-	    preview: './img/projects/st-maximin/preview.jpg',
-	    banner: './img/projects/thauvin/banner.jpg',
-	    content: './img/projects/thauvin/content.jpg',
-	    year: '2017',
-	  },
-
-
-	}
-
-
-/***/ },
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Backbone, _, $, q) {var isMobile = __webpack_require__(15);
-	var Projects = __webpack_require__(20);
+	var Projects = __webpack_require__(19);
 
 	module.exports = Backbone.View.extend({
 
@@ -913,8 +930,6 @@ webpackJsonp([0],[
 
 	    this.lang = params.lang;
 	    this.tpl = _.template($('#tpl-project').html());
-
-	    console.log(params);
 	  },
 
 	  renderOthers: function() {
@@ -948,13 +963,20 @@ webpackJsonp([0],[
 
 	    var that = this;
 
+	    this.$el.hide(0).removeClass('ready');
+
 	    return q.fcall(function() {
 
-	      that.$el.html(that.tpl({
+	      var hope = $(that.tpl({
 	        lang: that.lang,
 	        isMobile: isMobile,
 	        project: that.model
 	      }));
+
+	      that.$el = hope;
+	      console.log(that.$el);
+
+	      $('#projects-holder').append(that.$el);
 
 	      return that;
 	    })
@@ -966,14 +988,15 @@ webpackJsonp([0],[
 	    });
 	  },
 
-	  unload: function() {
+	  unload: function(fake) {
 
 	    var that = this;
 
+	    if (fake) return this.remove();
+
 	    this.$el.fadeOut(400, function() {
 
-	      that.$el.removeClass('ready');
-	      that.$el.empty();
+	      that.remove();
 	      $('body').removeClass('modal-open')
 	    });
 	  },
@@ -981,7 +1004,7 @@ webpackJsonp([0],[
 	});
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3), __webpack_require__(4), __webpack_require__(9)))
 
 /***/ }
 ]);

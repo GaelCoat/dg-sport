@@ -141,10 +141,21 @@ module.exports = Marionette.View.extend({
     this.$el.addClass('modal-open');
     this.$el.find('article#project').empty();
 
+    if (this.currentProject) {
+
+      var old = this.currentProject
+
+      _.delay(function() {
+
+        return old.unload(true);
+      }, 1000);
+
+    }
+
     this.currentProject = new Project({
       model: Projects[id],
       lang: this.lang,
-      el: this.$el.find('article#project')
+      //el: this.$el.find('article#project')
     });
 
     return this.currentProject.render();

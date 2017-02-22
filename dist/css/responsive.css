@@ -49,6 +49,16 @@
   section#home .col img {
     margin-top: 8%;
   }
+
+  article.project p.txt {
+    -webkit-column-gap: 45px;
+    -moz-column-gap: 45px;
+    column-gap: 45px;
+  }
+
+  article.project .top {
+    margin-top: 30px;
+  }
 }
 
 @media screen and (max-width: 1330px){
@@ -389,4 +399,103 @@
     padding: 12px;
   }
 
+  /* ------------------------------------ */
+  /* --------------------------- PROJECT FULL
+  /* ------------------------------------ */
+  article.project .row {
+    width: 100%;
+  }
+
+  article.project .top {
+    padding: 42px;
+    padding-top: 58px;
+    margin-top: 0;
+  }
+
+  article.project .top .left h5,
+  article.project .top .left span:before {
+    font-size: 3vw;
+  }
+
+  article.project .top .left img {
+    width: 3vw;
+  }
+
+  article.project .top .logo {
+    width: 5vw;
+    top: 0px;
+    margin-top: -8px;
+  }
+
+  article.project h2 + span {
+    font-size: 4vw;
+  }
+
+  article.project .row img.banner {
+    width: 100%;
+  }
+
+  article.project h3 {
+    font-size: 4.5vw;
+  }
+
+  article.project h3 img {
+    width: 7vw;
+  }
+
+  article.project p.txt {
+    -webkit-column-count: initial;
+    -moz-column-count: initial;
+    column-count: initial;
+    font-size: 3.5vw;
+    line-height: 1.2;
+  }
+
+  article.project a.button {
+    display: block;
+    margin: 44px auto;
+    width: 50%;
+    padding: 3.2vw;
+    text-align: center;
+    font-size: 3.6vw;
+  }
+
+  article.project a.button img {
+    display: none;
+  }
+
+  article.project  img.demo.banner{
+    width: 100vw;
+    margin-left: -10vw;
+    max-width: 100vw;
+  }
+
+  article.project ul li {
+    width: 100%;
+    display: block;
+    margin-bottom: 5vw;
+  }
+
+  article.project ul li a h5 {
+    font-size: 3.8vw;
+    margin-top: 24px;
+    opacity: 1;
+    transform: none;
+  }
+
+  article.project .row.underlined {
+    padding-bottom: 120px;
+    margin-top: 120px;
+  }
+
+  article.project ul li a span {
+    font-size: 3vw;
+    margin-top: 8px;
+    opacity: 1;
+    transform: none;
+  }
+
+  article.project ul li:nth-child(2) {
+    margin: 0;
+  }
 }

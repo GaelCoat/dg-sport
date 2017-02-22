@@ -11,8 +11,6 @@ module.exports = Backbone.View.extend({
 
     this.lang = params.lang;
     this.tpl = _.template($('#tpl-project').html());
-
-    console.log(params);
   },
 
   renderOthers: function() {
@@ -46,13 +44,20 @@ module.exports = Backbone.View.extend({
 
     var that = this;
 
+    this.$el.hide(0).removeClass('ready');
+
     return q.fcall(function() {
 
-      that.$el.html(that.tpl({
+      var hope = $(that.tpl({
         lang: that.lang,
         isMobile: isMobile,
         project: that.model
       }));
+
+      that.$el = hope;
+      console.log(that.$el);
+
+      $('#projects-holder').append(that.$el);
 
       return that;
     })
@@ -64,14 +69,15 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  unload: function() {
+  unload: function(fake) {
 
     var that = this;
 
+    if (fake) return this.remove();
+
     this.$el.fadeOut(400, function() {
 
-      that.$el.removeClass('ready');
-      that.$el.empty();
+      that.remove();
       $('body').removeClass('modal-open')
     });
   },
