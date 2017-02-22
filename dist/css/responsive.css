@@ -34,6 +34,10 @@
     font-size: 24px;
   }
 
+  article.project a.button{
+    margin: auto;
+  }
+
   section#projects .col a .bot {
     padding: 8% 10%;
   }
@@ -59,11 +63,16 @@
   article.project .top {
     margin-top: 30px;
   }
+
+  article.project .row .row {
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 1330px){
 
-  .row {
+  .row,
+  article.project .row {
     width: 80%;
   }
 
@@ -85,8 +94,13 @@
 
 @media screen and (max-width: 1200px){
 
-  .row {
+  .row,
+  article.project .row {
     width: 90%;
+  }
+
+  article.project .row .row {
+    width: 100%;
   }
 
   h1 {
@@ -127,6 +141,10 @@
 
   .loader img {
     height: 20vw;
+  }
+
+  article.project .row .row {
+    width: 80%;
   }
 
   .loader .centered .percent {
@@ -408,23 +426,26 @@
 
   article.project .top {
     padding: 42px;
-    padding-top: 58px;
+    padding-top: 68px;
     margin-top: 0;
   }
 
-  article.project .top .left h5,
+  article.project .top .left h5{
+    font-size: 3.7vw;
+  }
+
   article.project .top .left span:before {
-    font-size: 3vw;
+    font-size: 3.6vw;
   }
 
   article.project .top .left img {
-    width: 3vw;
+    width: 4vw;
   }
 
   article.project .top .logo {
-    width: 5vw;
+    width: 7vw;
     top: 0px;
-    margin-top: -8px;
+    margin-top: -14px;
   }
 
   article.project h2 + span {
@@ -436,24 +457,35 @@
   }
 
   article.project h3 {
-    font-size: 4.5vw;
+    font-size: 6vw;
   }
 
   article.project h3 img {
-    width: 7vw;
+    width: 9vw;
+    margin-right: 20px;
   }
 
   article.project p.txt {
     -webkit-column-count: initial;
     -moz-column-count: initial;
     column-count: initial;
-    font-size: 3.5vw;
+    font-size: 4vw;
     line-height: 1.2;
   }
 
+  article.project h2 {
+    float: none;
+  }
+
+  article.project .row.titles {
+    padding-top: 120px;
+    padding-bottom: 40px;
+  }
+
   article.project a.button {
-    display: block;
-    margin: 44px auto;
+    display: inline-block;
+    float: none;
+    margin: 24px auto;
     width: 50%;
     padding: 3.2vw;
     text-align: center;
@@ -467,6 +499,7 @@
   article.project  img.demo.banner{
     width: 100vw;
     margin-left: -10vw;
+    margin-top: 12px;
     max-width: 100vw;
   }
 
@@ -485,7 +518,7 @@
 
   article.project .row.underlined {
     padding-bottom: 120px;
-    margin-top: 120px;
+    margin-top: 90px;
   }
 
   article.project ul li a span {

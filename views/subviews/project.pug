@@ -5,29 +5,33 @@ article.project
     .row
       .top
         .left
-          a(href='/{{lang}}/')
+          a(href='/{{lang}}')
             img(src='./img/arrow-black.svg')
+            h5.black-clr WORK
           h5.black-clr
-            | WORK
             span.grey-clr {{project.name}}
-        a.right(href='/{{lang}}/')
+        a.right(href='/{{lang}}')
           img.logo(src='./img/logo.svg')
       <% if (!isMobile) {%>
       img.banner(src='{{project.banner}}')
       <% } else { %>
       img.banner(src='{{project.mobile_banner}}')
       <% } %>
-      .row
+      .row.titles
         h2.black-clr {{project.name}}
         //-span.grey-clr {{project.year}}
         a.button(href='{{project.link}}', target='_blank', regular)
           | Voir le site
           img(src='./img/arrow-white.svg')
-      .row.underlined
+      .row.underlined.brief
         h3.black-clr
           img(src='./img/icons/brief.svg')
           span BRIEF
+        <% if (!isMobile) {%>
         p.txt.grey-clr {{project.brief}}
+        <% } else { %>
+        p.txt.grey-clr {{project.brief_mobile}}
+        <% }  %>
       .row.underlined
         h3.black-clr
           img(src='./img/icons/design.svg')
@@ -36,6 +40,6 @@ article.project
       .row.underlined
         h3.black-clr
           img(src='./img/icons/others.svg')
-          span OTHER WORKS
+          span LAST WORKS
         ul.others
 

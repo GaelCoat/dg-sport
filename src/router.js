@@ -3,7 +3,8 @@ module.exports = Marionette.AppRouter.extend({
 
   routes: {
     '': 'home',
-    ':lang(/)': 'languageSelect',
+    ':lang': 'languageSelect',
+    ':lang/': 'languageSelect',
     ':lang/:project': 'project',
   },
 

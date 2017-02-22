@@ -55,7 +55,6 @@ module.exports = Backbone.View.extend({
       }));
 
       that.$el = hope;
-      console.log(that.$el);
 
       $('#projects-holder').append(that.$el);
 

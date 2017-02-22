@@ -66,22 +66,22 @@ module.exports = {
 
   ita: {
     home: {
-      subtitle: '<span>Accompagne les sportifs de haut</span><span>niveau dans le développement de leur</span><span>communauté et d’une identité digitale</span>'
+      subtitle: '<span>Accompagnamo gli sportivi di alto</span><span>livello nella costruzione della loro</span><span>identità digitale e della loro comunità</span>'
     },
     thinking: {
-      txt: 'Nous sommes convaincus que le digital joue désormais un rôle majeur dans le monde du sport. Il permet aux sportifs de fédérer une communauté, de bâtir une image forte, de marketer leurs performances… Autant d’éléments sous évalués mais pourtant essentiels pour décupler la valeur d’un sportif à travers ses contrats en clubs, ses contrats de sponsoring & pour lui permettre de réussir ses projets annexes.',
-      quote: '<span>Le nom d\'un grand</span><span>sportif est une</span><span>marque qu\'il</span><span>convient à ce</span><span>titre de protéger et</span><span>de développer sur</span><span>le plan digital.</span>',
-      quoteRaw: '\"Le nom d\'un grand sportif est une marque qu\'il convient à ce titre de protéger et de développer sur le plan digital.\"',
+      txt: 'Siamo convinti che il digitale giochi un ruolo importante nel mondo dello sport: permette agli sportivi di federare una comunità, di costruire un\'immagine forte e di promuovere le loro performance. Questi elementi, spesso sottovalutati, sono essenziali per valorizzare un atleta e aprirgli le porte verso migliori contratti, migliori sponsor e per permettergli di realizzare i progetti secondari.',
+      quote: '<span>Il nome di un grande</span><span>sportivo è un marchio</span><span>che come tale</span><span>bisogna proteggere</span><span>e costruire sul</span><span>piano digitale.</span>',
+      quoteRaw: '\"Il nome di un grande sportivo è un marchio che come tale bisogna proteggere e costruire sul piano digitale.\"',
     },
     us: {
-      quote: '<span>Nous nous battons chaque jour pour bâtir,</span><span>à partir de sportifs, des héros à part entière.</span>',
-      quoteRaw: '<span>Nous nous battons chaque jour pour ériger les sportifs de haut niveau au rang d’idole. Nous bâtissons les héros de demain.</span>',
-      txt: 'Nous sommes une équipe de passionnés, d’un dévouement sans limite et d’une fiabilité sans faille. Nous fournissons un travail d’une qualité incomparable, focus sur les détails et l’innovation. Nous sommes loués par nos clients pour notre aptitude à sortir du rôle d’agence traditionnelle afin de nous positionner comme un véritable partenaire de leur carrière.'
+      quote: '<span>Ci battiamo ogni giorno per trasformare</span><span>i grandi sportivi negli idoli di domani.</span>',
+      quoteRaw: '<span>Ci battiamo ogni giorno per trasformare i grandi sportivi negli idoli di domani.</span>',
+      txt: 'Rimettiamo costantemente in causa lo status quo per poter basare il nostro lavoro sull\'innovazione e sull\'attenzione ai dettagli. I clienti apprezzano soprattutto la nostra capacità di uscire dal ruolo di agenzia tradizionale, il che ci permette di essere dei veri e propri partner della loro carriera.'
     },
     skills: {
-      ui: 'Création, refonte & optimisation<br/>de sites internet sur mesure',
-      identity: 'Élaboration de logos, de designs &<br/>de chartes graphiques',
-      content: 'Conception de GIF, de filtres &<br/>de montages photos',
+      ui: 'Progettazione, restyling &<br/>ottimizzazione di siti web responsive',
+      identity: 'Creazione di loghi,<br/>design e carta grafica',
+      content: 'Creazione di GIF,<br/>filtri e fotomontaggi',
     }
   },
 }
